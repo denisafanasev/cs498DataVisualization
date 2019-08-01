@@ -304,7 +304,7 @@
       <column caption='R Rin Min' datatype='integer' name='[RRinMin]' role='measure' type='quantitative' />
       <column caption='R Rinc Max' datatype='integer' name='[RRincMax]' role='measure' type='quantitative' />
       <column caption='Rinc Diff' datatype='integer' name='[RincDiff]' role='measure' type='quantitative' />
-      <layout dim-ordering='alphabetic' dim-percentage='0.350794' measure-ordering='alphabetic' measure-percentage='0.649206' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.333333' measure-ordering='alphabetic' measure-percentage='0.666667' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
@@ -978,7 +978,7 @@
     </worksheet>
   </worksheets>
   <windows source-height='114'>
-    <window class='worksheet' name='Overview'>
+    <window class='worksheet' maximized='true' name='Overview'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1005,6 +1005,44 @@
         </edge>
       </cards>
       <simple-id uuid='{E2D9B8A9-A6A0-4DA1-9AD4-1703B95A6D3B}' />
+    </window>
+    <window class='worksheet' name='Drilldown2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[:Measure Names]</field>
+            <field>[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[none:Bin Year:ok]</field>
+            <field>[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[none:Country:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{43D97F51-EFBB-40BE-BB67-17B1EC4975AE}' />
     </window>
     <window class='worksheet' name='Pop_drilldown_data'>
       <cards>
@@ -1165,44 +1203,6 @@
         </highlight>
       </viewpoint>
       <simple-id uuid='{D1915CB9-37E7-4246-8E10-D7B4DB79D92D}' />
-    </window>
-    <window class='worksheet' maximized='true' name='Drilldown2'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-            <card type='measures' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card pane-specification-id='0' param='[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[:Measure Names]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <highlight>
-          <color-one-way>
-            <field>[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[:Measure Names]</field>
-            <field>[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[none:Bin Year:ok]</field>
-            <field>[federated.06fqhdu02o1at81ar5r7t1uqb7t1].[none:Country:nk]</field>
-          </color-one-way>
-        </highlight>
-      </viewpoint>
-      <simple-id uuid='{43D97F51-EFBB-40BE-BB67-17B1EC4975AE}' />
     </window>
   </windows>
   <thumbnails>
