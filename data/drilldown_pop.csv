@@ -1,0 +1,551 @@
+﻿﻿Country;Bin Year;Pop
+Albania;1998;31
+Albania;2003;31
+Albania;2008;32
+Algeria;1988;240
+Algeria;1993;272
+Angola;1993;114
+Angola;1998;131
+Argentina;1988;317
+Argentina;1993;340
+Argentina;1998;361
+Argentina;2003;380
+Argentina;2008;397
+Armenia;1998;31
+Armenia;2003;31
+Armenia;2008;31
+Australia;1988;165
+Australia;1993;177
+Australia;1998;187
+Australia;2003;199
+Austria;1988;76
+Austria;1993;79
+Austria;1998;80
+Austria;2003;81
+Austria;2008;83
+Azerbaijan;1993;75
+Azerbaijan;2003;82
+Azerbaijan;2008;88
+Bangladesh;1988;1001
+Bangladesh;1993;1126
+Bangladesh;1998;1248
+Bangladesh;2003;1365
+Bangladesh;2008;1455
+Barbados;1998;3
+Belarus;1988;101
+Belarus;1993;102
+Belarus;1998;101
+Belarus;2003;99
+Belgium;1988;99
+Belgium;1993;101
+Belgium;1998;102
+Belgium;2003;104
+Belgium;2008;107
+Belize;1993;2
+Belize;1998;2
+Benin;2003;72
+Bhutan;2003;6
+Bhutan;2008;7
+Bolivia;1988;64
+Bolivia;1993;71
+Bolivia;1998;80
+Bolivia;2003;88
+Bolivia;2008;96
+Bosnia and Herzegovina;2003;38
+Bosnia and Herzegovina;2008;38
+Botswana;1993;15
+Brazil;1988;1445
+Brazil;1993;1570
+Brazil;1998;1694
+Brazil;2003;1816
+Brazil;2008;1915
+Bulgaria;1988;90
+Bulgaria;1993;85
+Bulgaria;1998;83
+Bulgaria;2003;78
+Bulgaria;2008;76
+Burkina Faso;1993;101
+Burkina Faso;1998;116
+Burkina Faso;2003;134
+Burkina Faso;2008;155
+Burundi;1993;59
+Burundi;1998;62
+Burundi;2008;79
+Cambodia;1993;105
+Cambodia;1998;120
+Cambodia;2003;130
+Cambodia;2008;138
+Cameroon;1998;150
+Cameroon;2003;168
+Cameroon;2008;188
+Canada;1988;269
+Canada;1993;288
+Canada;1998;302
+Canada;2003;317
+Canada;2008;333
+Cape Verde;2003;5
+Central African Republic;1993;32
+Central African Republic;2003;39
+Central African Republic;2008;42
+Chad;2003;92
+Chile;1988;127
+Chile;1993;139
+Chile;1998;150
+Chile;2003;160
+Chile;2008;168
+China;1988;11016
+China;1993;11784
+China;1998;12419
+China;2003;12884
+China;2008;13247
+Colombia;1988;319
+Colombia;1993;351
+Colombia;1998;384
+Colombia;2003;417
+Colombia;2008;450
+Comoros;1993;5
+Comoros;2003;6
+Congo, Dem. Rep.;2003;541
+Congo, Dem. Rep.;2008;625
+Congo, Rep.;2003;34
+Costa Rica;1988;29
+Costa Rica;1993;33
+Costa Rica;1998;37
+Costa Rica;2003;42
+Costa Rica;2008;45
+Cote d'Ivoire;1988;117
+Cote d'Ivoire;1993;138
+Cote d'Ivoire;1998;159
+Cote d'Ivoire;2003;175
+Cote d'Ivoire;2008;190
+Croatia;1998;45
+Croatia;2003;44
+Croatia;2008;44
+Cyprus;1988;7
+Cyprus;1998;9
+Cyprus;2008;11
+Czech Republic;1988;104
+Czech Republic;1993;103
+Czech Republic;1998;103
+Czech Republic;2003;102
+Czech Republic;2008;104
+Denmark;1988;51
+Denmark;1993;52
+Denmark;1998;53
+Denmark;2003;54
+Denmark;2008;55
+Djibouti;2003;8
+Dominican Republic;1988;69
+Dominican Republic;1993;76
+Dominican Republic;1998;83
+Dominican Republic;2003;90
+Dominican Republic;2008;97
+Ecuador;1988;98
+Ecuador;1993;110
+Ecuador;1998;120
+Ecuador;2003;130
+Ecuador;2008;141
+Egypt, Arab Rep.;1988;544
+Egypt, Arab Rep.;1993;600
+Egypt, Arab Rep.;1998;653
+Egypt, Arab Rep.;2003;715
+Egypt, Arab Rep.;2008;783
+El Salvador;1988;52
+El Salvador;1993;56
+El Salvador;1998;59
+El Salvador;2003;60
+El Salvador;2008;61
+Estonia;1988;16
+Estonia;1993;15
+Estonia;1998;14
+Estonia;2008;13
+Ethiopia;1993;535
+Ethiopia;1998;622
+Ethiopia;2003;708
+Fiji;2003;8
+Fiji;2008;8
+Finland;1988;49
+Finland;1993;51
+Finland;1998;52
+Finland;2003;52
+Finland;2008;53
+France;1988;577
+France;1993;591
+France;1998;603
+France;2003;622
+France;2008;644
+Gabon;2003;13
+Gambia, The;1993;11
+Gambia, The;1998;12
+Gambia, The;2003;14
+Georgia;1998;45
+Georgia;2003;43
+Georgia;2008;44
+Germany;1988;781
+Germany;1993;812
+Germany;1998;820
+Germany;2003;825
+Germany;2008;821
+Ghana;1988;140
+Ghana;1993;161
+Ghana;1998;183
+Ghana;2003;206
+Greece;1988;100
+Greece;1993;105
+Greece;1998;108
+Greece;2003;110
+Greece;2008;112
+Guatemala;1988;85
+Guatemala;1998;107
+Guatemala;2003;121
+Guatemala;2008;137
+Guinea;1993;69
+Guinea;2003;87
+Guinea;2008;96
+Guinea-Bissau;1993;11
+Guinea-Bissau;2003;13
+Guyana;1993;7
+Guyana;1998;7
+Haiti;2003;91
+Honduras;1988;46
+Honduras;1993;53
+Honduras;1998;60
+Honduras;2003;66
+Honduras;2008;73
+Hong Kong SAR, China;1993;59
+Hong Kong SAR, China;1998;65
+Hungary;1988;106
+Hungary;1993;104
+Hungary;1998;103
+Hungary;2003;101
+Hungary;2008;100
+Iceland;2003;3
+Iceland;2008;3
+India;1988;8377
+India;1993;9282
+India;1998;10185
+India;2003;11059
+India;2008;11909
+Indonesia;1988;1780
+Indonesia;1993;1935
+Indonesia;1998;2078
+Indonesia;2003;2218
+Indonesia;2008;2350
+Iran, Islamic Rep.;1988;518
+Iran, Islamic Rep.;1993;579
+Iran, Islamic Rep.;1998;631
+Iran, Islamic Rep.;2003;681
+Iraq;2008;302
+Ireland;1988;35
+Ireland;1993;36
+Ireland;1998;37
+Ireland;2003;40
+Ireland;2008;44
+Israel;1988;44
+Israel;1993;53
+Israel;1998;60
+Israel;2003;67
+Israel;2008;73
+Italy;1988;566
+Italy;1993;568
+Italy;1998;569
+Italy;2003;576
+Italy;2008;598
+Jamaica;1988;24
+Jamaica;1993;24
+Jamaica;1998;26
+Jamaica;2003;26
+Japan;1988;1226
+Japan;1993;1245
+Japan;1998;1264
+Japan;2003;1277
+Japan;2008;1277
+Jordan;1988;29
+Jordan;1993;39
+Jordan;1998;46
+Jordan;2003;52
+Jordan;2008;58
+Kazakhstan;1988;161
+Kazakhstan;1993;163
+Kazakhstan;1998;151
+Kazakhstan;2003;149
+Kenya;1993;258
+Kenya;1998;297
+Kenya;2008;385
+Korea, Rep.;1988;420
+Korea, Rep.;1993;441
+Korea, Rep.;1998;463
+Korea, Rep.;2003;479
+Korea, Rep.;2008;489
+Kosovo;2008;17
+Kyrgyz Republic;1993;45
+Kyrgyz Republic;1998;48
+Kyrgyz Republic;2003;50
+Kyrgyz Republic;2008;53
+Lao PDR;1993;46
+Lao PDR;1998;51
+Lao PDR;2003;56
+Lao PDR;2008;60
+Latvia;1988;27
+Latvia;1993;26
+Latvia;1998;24
+Latvia;2003;23
+Latvia;2008;23
+Lesotho;1988;16
+Lesotho;1993;17
+Lesotho;2003;20
+Liberia;2008;37
+Lithuania;1988;37
+Lithuania;1993;37
+Lithuania;2003;35
+Lithuania;2008;34
+Luxembourg;1993;4
+Luxembourg;1998;4
+Luxembourg;2003;5
+Luxembourg;2008;5
+Macedonia, FYR;1998;20
+Macedonia, FYR;2003;20
+Macedonia, FYR;2008;21
+Madagascar;1993;123
+Madagascar;1998;144
+Madagascar;2003;168
+Madagascar;2008;195
+Malawi;1998;106
+Malawi;2003;121
+Malawi;2008;140
+Malaysia;1988;172
+Malaysia;1993;197
+Malaysia;1998;223
+Malaysia;2003;251
+Malaysia;2008;275
+Maldives;1998;3
+Maldives;2003;3
+Mali;1993;93
+Mali;2003;124
+Mali;2008;145
+Mauritania;1988;19
+Mauritania;1993;22
+Mauritania;1998;25
+Mauritania;2003;29
+Mauritania;2008;33
+Mexico;1988;810
+Mexico;1993;891
+Mexico;1998;970
+Mexico;2003;1039
+Mexico;2008;1106
+Micronesia, Fed. Sts.;1998;1
+Moldova;1998;37
+Moldova;2003;36
+Moldova;2008;36
+Mongolia;2003;25
+Mongolia;2008;27
+Montenegro;2003;6
+Montenegro;2008;6
+Morocco;1993;261
+Morocco;1998;281
+Morocco;2003;298
+Morocco;2008;313
+Mozambique;1998;173
+Mozambique;2003;197
+Mozambique;2008;223
+Namibia;1993;16
+Namibia;2003;20
+Nepal;1998;233
+Nepal;2003;261
+Nepal;2008;289
+Netherlands;1988;148
+Netherlands;1993;153
+Netherlands;1998;157
+Netherlands;2003;162
+Netherlands;2008;164
+New Zealand;1988;34
+New Zealand;1993;36
+New Zealand;1998;38
+Nicaragua;1993;44
+Nicaragua;1998;49
+Nicaragua;2003;53
+Nicaragua;2008;56
+Niger;1993;86
+Niger;2008;145
+Nigeria;1988;927
+Nigeria;1993;1049
+Nigeria;1998;1180
+Nigeria;2003;1331
+Nigeria;2008;1507
+Norway;1993;43
+Norway;1998;44
+Norway;2003;46
+Norway;2008;48
+Pakistan;1988;1053
+Pakistan;1993;1210
+Pakistan;1998;1378
+Pakistan;2003;1531
+Pakistan;2008;1674
+Panama;1993;26
+Panama;1998;28
+Panama;2003;31
+Panama;2008;34
+Papua New Guinea;1998;51
+Paraguay;1988;40
+Paraguay;1993;46
+Paraguay;1998;51
+Paraguay;2003;57
+Paraguay;2008;62
+Peru;1993;230
+Peru;1998;251
+Peru;2003;269
+Peru;2008;285
+Philippines;1988;586
+Philippines;1993;662
+Philippines;1998;740
+Philippines;2003;823
+Philippines;2008;902
+Poland;1988;378
+Poland;1993;385
+Poland;1998;387
+Poland;2003;382
+Poland;2008;381
+Portugal;1988;100
+Portugal;1993;100
+Portugal;1998;101
+Portugal;2003;104
+Portugal;2008;106
+Romania;1988;231
+Romania;1993;228
+Romania;1998;225
+Romania;2008;215
+Russian Federation;1993;1485
+Russian Federation;1998;1469
+Russian Federation;2003;1446
+Russian Federation;2008;1420
+Rwanda;1998;69
+Rwanda;2003;89
+Rwanda;2008;100
+Sao Tome and Principe;1998;1
+Senegal;1993;79
+Senegal;2003;103
+Serbia;2003;75
+Serbia;2008;74
+Seychelles;1998;1
+Seychelles;2008;1
+Sierra Leone;2003;47
+Singapore;1993;33
+Singapore;1998;39
+Singapore;2003;41
+Singapore;2008;48
+Slovak Republic;1988;53
+Slovak Republic;1993;53
+Slovak Republic;1998;54
+Slovak Republic;2003;54
+Slovak Republic;2008;54
+Slovenia;1988;20
+Slovenia;1993;20
+Slovenia;1998;20
+Slovenia;2003;20
+Slovenia;2008;20
+South Africa;1993;375
+South Africa;1998;419
+South Africa;2003;461
+South Africa;2008;488
+Spain;1988;387
+Spain;1993;392
+Spain;1998;397
+Spain;2003;420
+Spain;2008;456
+Sri Lanka;1988;166
+Sri Lanka;1993;176
+Sri Lanka;1998;188
+Sri Lanka;2003;192
+Sri Lanka;2008;202
+St. Lucia;1993;1
+Sudan;2008;324
+Suriname;1998;5
+Swaziland;1993;9
+Swaziland;1998;10
+Swaziland;2008;10
+Sweden;1993;87
+Sweden;1998;89
+Sweden;2003;90
+Sweden;2008;92
+Switzerland;1993;69
+Switzerland;1998;71
+Switzerland;2003;73
+Switzerland;2008;76
+Syrian Arab Republic;2003;175
+Taiwan;1993;210
+Taiwan;1998;219
+Taiwan;2003;226
+Taiwan;2008;230
+Tajikistan;1998;60
+Tajikistan;2003;63
+Tajikistan;2008;67
+Tanzania;1993;282
+Tanzania;2003;368
+Tanzania;2008;423
+Thailand;1988;554
+Thailand;1993;587
+Thailand;1998;617
+Thailand;2003;654
+Thailand;2008;683
+Timor-Leste;2003;9
+Timor-Leste;2008;11
+Togo;2008;58
+Trinidad and Tobago;1988;12
+Trinidad and Tobago;1993;12
+Tunisia;1988;79
+Tunisia;1993;87
+Tunisia;1998;93
+Tunisia;2003;98
+Turkey;1988;523
+Turkey;1993;570
+Turkey;1998;617
+Turkey;2003;663
+Turkey;2008;709
+Turkmenistan;1998;44
+Turkmenistan;2003;46
+Uganda;1988;165
+Uganda;1993;196
+Uganda;1998;228
+Uganda;2003;266
+Uganda;2008;313
+Ukraine;1993;522
+Ukraine;1998;501
+Ukraine;2003;478
+Ukraine;2008;463
+United Kingdom;1988;569
+United Kingdom;1993;577
+United Kingdom;1998;585
+United Kingdom;2003;596
+United Kingdom;2008;614
+United States;1988;2445
+United States;1993;2599
+United States;1998;2759
+United States;2003;2901
+United States;2008;3041
+Uruguay;1988;31
+Uruguay;1993;32
+Uruguay;1998;33
+Uruguay;2003;33
+Uruguay;2008;33
+Uzbekistan;1988;196
+Uzbekistan;1993;219
+Uzbekistan;2003;256
+Venezuela, RB;1988;188
+Venezuela, RB;1993;211
+Venezuela, RB;1998;234
+Venezuela, RB;2003;257
+Venezuela, RB;2008;279
+Vietnam;1993;696
+Vietnam;1998;755
+Vietnam;2003;805
+Vietnam;2008;851
+West Bank and Gaza;2008;39
+Yemen, Rep.;1998;167
+Yemen, Rep.;2003;194
+Yemen, Rep.;2008;226
+Zambia;1993;85
+Zambia;1998;97
+Zambia;2003;109
+Zambia;2008;124
+Zimbabwe;1993;112
+Zimbabwe;1998;123
