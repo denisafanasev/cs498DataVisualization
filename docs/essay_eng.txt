@@ -1,5 +1,12 @@
+
+Work credentials
+
+Sudent: Denis Afanasev (denisa2@illinoise.edu)
 Datasource: https://www.worldbank.org/en/research/brief/World-Panel-Income-Distribution
 Datasource description: http://pubdocs.worldbank.org/pubdocs/publicdoc/2015/10/895211444154092188/Description-Lakner-Milanovic-database-2.pdf
+Source code: https://github.com/denisafanasev/cs498DataVisualization
+Web view: https://denisafanasev.github.io/cs498DataVisualization/
+
 
 Messaging
 
