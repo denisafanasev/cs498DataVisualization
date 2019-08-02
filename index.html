@@ -48,18 +48,17 @@
     </p>
     <p>
         <strong>Datasource:</strong> <a href="https://www.worldbank.org/en/research/brief/World-Panel-Income-Distribution" > https://www.worldbank.org/en/research/brief/World-Panel-Income-Distribution </a> <br>
-        <strong>Datasource description:</strong> <a href="http://pubdocs.worldbank.org/pubdocs/publicdoc/2015/10/895211444154092188/Description-Lakner-Milanovic-database-2.pdf">  http://pubdocs.worldbank.org/pubdocs/publicdoc/2015/10/895211444154092188/Description-Lakner-Milanovic-database-2.pdf </a> <br>
         <strong>Source code:</strong> <a href="https://github.com/denisafanasev/cs498DataVisualization"> https://github.com/denisafanasev/cs498DataVisualization </a> <br>
         <strong>Web view:</strong> <a href="https://denisafanasev.github.io/cs498DataVisualization/"> https://denisafanasev.github.io/cs498DataVisualization/ </a> <br>
     </p>
 
-    <h4 class="mt-4">Messaging</h4>
 
+    <h4 class="mt-4">Messaging</h4>
 
     <p align="justify">In this narrative visualization, the main theme is to examine the relationship between changes in a country's population 
     size and the difference in per capita income between the poorest and richest segments of the population. 
     The message I want to convey is that, as we can see in the case of the study of changes in the population of each 
-    country and changes in income differentials, these changes are loosely related. 
+    country and changes in income differentials, these changes are loosely related. <br>
     Visualization provides an opportunity to examine the changes in both relative and absolute values of these indicators. 
     Viewers can see and assess trends in these indicators. The main page (Scene 1) summarizes the current state of the 
     country's population, the difference between GDP per capita between the richest and poorest people, and the change in 
@@ -71,40 +70,49 @@
     <p align="justify">My narrative visualization follows the drilldown structure. On the main page (scene 1), the user sees the overview 
     of all the data and can then move on to either scene 2, which shows the absolute dynamics of the indicators, or scene 3, 
     which shows the dynamics of changes in relative indicators, of his choice. In this way, users can explore the 
-    dynamics of any country of their choice.
+    dynamics of any country of their choice. </p>
 
-        Scene 1:
-        This slide shows a summary of all countries on the scoreplot graph.
+    <div class="p-3">
+        <h5 class="mt-4"> Scene 1: </h5>
+        <p>
+            This slide shows a summary of all countries on the scoreplot graph.<br><br>
 
-        Axis X (Totpop) population in 2008
-        Axis Y-axis (RRincMax) is the highest per capita GDP in 2008 for the richest segments of the population.
+            <ul>
+                <li> Axis X (Totpop) population in 2008</li>
+                <li>Axis Y-axis (RRincMax) is the highest per capita GDP in 2008 for the richest segments of the population.</li>
+            </ul>
 
-        At the intersection of these indicators is the country where the radius (RIncDiffP) - the relative change in 
-        GDP in the country to the level of 1998 (over a period of 10 years)
+            At the intersection of these indicators is the country where the radius (RIncDiffP) - the relative change in 
+            GDP in the country to the level of 1998 (over a period of 10 years). <br>
 
-        Below the graph there are 2 buttons that allow the user to switch to a detailed study of the dynamics 
-        of the indicators for each country of his choice. To go to the graph, the user has to select a country and 
-        click the corresponding button.
+            Below the graph there are 2 buttons that allow the user to switch to a detailed study of the dynamics 
+            of the indicators for each country of his choice. To go to the graph, the user has to select a country and 
+            click the corresponding button. <br>
+        </p>
 
-        Scene 2:
-        This slide shows the visualization of absolute population size and the difference between GDP per capita 
-        for the poorest and wealthiest segments of the population.
-        
-        The left (linear) chart shows the number of population depending on the year.
+        <h5 class="mt-4"> Scene 2: </h5>
+        <p>
+            This slide shows the visualization of absolute population size and the difference between GDP per capita 
+            for the poorest and wealthiest segments of the population. <br>
             
-        The right (barchart) chart shows the levels of GDP per capita for the poorest and richest segments of 
-        the population for each year of measurement of these indicators.
+            The left (linear) chart shows the number of population depending on the year. <br>
+                
+            The right (barchart) chart shows the levels of GDP per capita for the poorest and richest segments of 
+            the population for each year of measurement of these indicators. <br>
+        </p>
 
 
-        Scene 3:
-        This slide shows the relative size of the population and the difference between GDP per capita for the poorest 
-        and wealthiest segments of the population.
+        <h5 class="mt-4"> Scene 3: </h5>
+        <p>
+            This slide shows the relative size of the population and the difference between GDP per capita for the poorest 
+            and wealthiest segments of the population. <br>
 
-        The graph (barchart) shows the level of change in GDP per capita for the poorest and wealthiest segments 
-        of the population for each year of measurement and the level of change in population size.
+            The graph (barchart) shows the level of change in GDP per capita for the poorest and wealthiest segments 
+            of the population for each year of measurement and the level of change in population size. <br>
 
-        The graph illustrates the relationship between these indicators.
-    </p>
+            The graph illustrates the relationship between these indicators.
+        </p>
+    </div>
 
     <h4 class="mt-4">Visual Structure</h4>
 
@@ -147,7 +155,9 @@
     Buttons are displayed at the bottom of the page in the form of blue rectangles and white text, 
     informing viewers about the possibility of moving back and forth between the main scenes, if any.</p>
 
-
+    <form action="data_visualization.html">
+        <input class="btn btn-dark" type="submit" value="Go to visualization" />
+    </form>
 
     </div>
     <!-- /.container -->
