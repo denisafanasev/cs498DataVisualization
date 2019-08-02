@@ -90,12 +90,12 @@
 
             if (sceneNum == 2) {
                 $('.card-header').text("Absolute values drilldown");
-                createBarChart();
+                createBarChartAbsolute();
             }
 
             if (sceneNum == 3) {
                 $('.card-header').text("Relative values drilldown");
-                createBarChart();
+                createBarChartRelative();
             }
         }
 
@@ -147,14 +147,24 @@
             });
         }
 
-        function createBarChart(){
+        function createBarChartAbsolute(){
+
+            var country = "China"
+
+            var margin = 50;
+            var graph_width = parseInt(d3.select("svg").style("width").replace("px", ""))-margin*2;
+            var graph_height = parseInt(d3.select("svg").style("height").replace("px", ""))-margin*2;
+            var barWidth = graph_width / 8;
+
+            function getMaxOfArray(numArray) {
+                return Math.max.apply(null, numArray);
+            }
 
             d3.csv("data/drilldown_rrinc.csv").then(function(d) {
 
-                var country = "Argentina"
-
                 var currentCountryData_array = [];
                 var Rrinc_max_array = [];
+                var Rrinc_min_array = [];
                 var years = [];
 
                 for (var i = 0; i < d.length; i++) {
@@ -164,47 +174,56 @@
                         currentCountryData_array.push(d[i]);
 
                         Rrinc_max_array.push(d[i].Rrinc_max);
+                        Rrinc_min_array.push(d[i].Rrinc_min);
 
                         years.push(d[i].Bin_Year);
                     }
                 }
 
                 //console.log(currentCountryData_array);
-
                 //console.log(Rrinc_max_array);
 
-                function getMaxOfArray(numArray) {
-                    return Math.max.apply(null, numArray);
-                }
-
                 var total_Rrinc_max = getMaxOfArray(Rrinc_max_array);
+                var total_Rrinc_min = getMaxOfArray(Rrinc_min_array);
 
-                console.log(total_Rrinc_max);
+                //console.log(total_Rrinc_max);
 
+                var data_max = Rrinc_max_array.map((value, index) => ({x: years[index], y: +value}));
+                var data_min = Rrinc_min_array.map((value, index) => ({x: years[index], y: +value}));
+                console.log('data_max', data_max);
+                console.log('data_min', data_min);
 
-                var data = Rrinc_max_array.map((value, index) => ({x: years[index], y: +value}));
-                console.log('data', data);
-
-                var width = parseInt(d3.select("svg").style("width").replace("px", ""));
-                var height = parseInt(d3.select("svg").style("height").replace("px", ""));
-                var margin = 50;
-                var barWidth = width / 8;
-
-                var x = d3.scaleBand().domain(data.map(p => p.x)).range([0, width]);
-                var y = d3.scaleLinear().domain([0, total_Rrinc_max]).range([height, 0]);
-                var h = d3.scaleLinear().domain([0, total_Rrinc_max]).range([0, height]);
+                var x = d3.scaleBand().domain(data_max.map(p => p.x)).range([0, graph_width]);
+                var y = d3.scaleLinear().domain([0, total_Rrinc_max]).range([graph_height, 0]);
+                var h = d3.scaleLinear().domain([0, total_Rrinc_max]).range([0, graph_height]);
 
                 d3.select('svg')
-                    .attr("width","100%")
-                    .attr("height",height)
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
                     .append("g")
                     .attr("transform","translate("+margin+","+margin+")")
 
                     .selectAll()
-                    .data(data)
+                    .data(data_max)
                     .enter().append("rect")
                     .attr("x", d => x(d.x) + x.bandwidth() / 2 - barWidth / 2)
-                    .attr("y", d => height - h(d.y))
+                    .attr("y", d => graph_height - h(d.y))
+                    .attr('fill', 'orange')
+                    .attr("width", barWidth)
+                    .attr("height", d => h(d.y));
+                
+                d3.select('svg')
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .selectAll()
+                    .data(data_min)
+                    .enter().append("rect")
+                    .attr("x", d => x(d.x) + x.bandwidth() / 2 - barWidth / 2)
+                    .attr("y", d => graph_height - h(d.y))
+                    .attr('fill', 'blue')
                     .attr("width", barWidth)
                     .attr("height", d => h(d.y));
 
@@ -213,7 +232,206 @@
                     .call(d3.axisLeft(y));
 
                 d3.select('svg').append('g')
-                    .attr('transform', "translate("+margin+","+(height-margin)+")")
+                    .attr('transform', "translate("+margin+","+(graph_height+margin)+")")
+                    .call(d3.axisBottom(x));
+
+            });
+
+            d3.csv("data/drilldown_pop.csv").then(function(data) {
+
+                var currentCountryData_array = [];
+                var Pop_max_array = [];
+                var years = [];
+
+                data.forEach(function(d) {
+                    console.log(d);
+                });
+
+                for (var i = 0; i < data.length; i++) {
+                    
+                    row = data[i];
+                    //console.log(row.pop)
+                    var currentCountry = row["Country"];
+                    
+                    if (currentCountry == country) {
+                        currentCountryData_array.push(data[i]);
+                        Pop_max_array.push(data[i].Pop);
+                        years.push(data[i].Bin_Year);
+                    }
+                }
+
+                console.log(currentCountryData_array);
+                console.log(Pop_max_array);
+
+                var total_Pop_max = getMaxOfArray(Pop_max_array);
+
+                //console.log(total_Rrinc_max);
+
+                var data_pop = Pop_max_array.map((value, index) => ({x: years[index], y: +value}));
+                console.log('data_pop', data_pop);
+
+                var x = d3.scaleBand().domain(data_pop.map(p => p.x)).range([0, graph_width]);
+                var y = d3.scaleLinear().domain([0, total_Pop_max]).range([graph_height, 0]);
+                var h = d3.scaleLinear().domain([0, total_Pop_max]).range([0, graph_height]);
+
+                d3.select('svg')
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .append("path")
+                    .datum(data_pop)
+                    .attr("class", "line")
+                    .attr("fill", "none")
+                    .attr("stroke", "steelblue")
+                    .attr("stroke-width", 4)
+                    .attr("d", d3.line()
+                        .x(function(d) { return (x(d.x)+margin*2) })
+                        .y(function(d) { return (graph_height - h(d.y)) })
+                        );
+
+                d3.select('svg')
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .selectAll()
+                    .data(data_pop)
+                    .enter().append("circle")
+                    .attr("cx", d => x(d.x)+margin*2)
+                    .attr("cy", d => graph_height - h(d.y))
+                    .attr("r", 5)
+                    .style('fill', 'red')
+                    .attr("width", barWidth)
+                    .attr("height", d => h(d.y));
+
+                d3.select('svg').append('g')
+                    .attr('transform', "translate("+(graph_width+margin)+","+margin+")")
+                    .call(d3.axisRight(y));
+            });
+        }
+
+
+        function createBarChartRelative(){
+
+            var country = "China"
+
+            var margin = 50;
+            var graph_width = parseInt(d3.select("svg").style("width").replace("px", ""))-margin*2;
+            var graph_height = parseInt(d3.select("svg").style("height").replace("px", ""))-margin*2;
+            var barWidth = graph_width / 8;
+
+            function getMaxOfArray(numArray) {
+                return Math.max.apply(null, numArray);
+            }
+
+            d3.csv("data/drilldown_relational.csv").then(function(d) {
+
+                var currentCountryData_array = [];
+                var Rrinc_array = [];
+                var Pop_array = [];
+                var years = [];
+
+                for (var i = 0; i < d.length; i++) {
+                    var currentCountry = d[i].Country;
+
+                    if (currentCountry == country) {
+                        currentCountryData_array.push(d[i]);
+
+                        Rrinc_array.push(d[i].Rrinc_diff_p);
+                        Pop_array.push(d[i].Pop_diff_p);
+
+                        years.push(d[i].Bin_Year);
+                    }
+                }
+
+                //console.log(currentCountryData_array);
+                //console.log(Rrinc_max_array);
+
+                var total_Rrinc = getMaxOfArray(Rrinc_array);
+                var total_Pop = getMaxOfArray(Pop_array);
+
+                //console.log(total_Rrinc_max);
+
+                var data_rinc = Rrinc_array.map((value, index) => ({x: years[index], y: +value}));
+                var data_pop = Pop_array.map((value, index) => ({x: years[index], y: +value}));
+                console.log('data_rinc', data_rinc);
+                console.log('data_pop', data_pop);
+
+                var x = d3.scaleBand().domain(data_rinc.map(p => p.x)).range([0, graph_width]);
+                var y = d3.scaleLinear().domain([0, total_Rrinc]).range([graph_height, 0]);
+                var h = d3.scaleLinear().domain([0, total_Rrinc]).range([0, graph_height]);
+
+                d3.select('svg')
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .append("path")
+                    .datum(data_rinc)
+                    .attr("class", "line")
+                    .attr("fill", "none")
+                    .attr("stroke", "steelblue")
+                    .attr("stroke-width", 4)
+                    .attr("d", d3.line()
+                        .x(function(d) { return (x(d.x)+margin*2) })
+                        .y(function(d) { return (graph_height - h(d.y)) })
+                        );
+
+                d3.select('svg')
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .selectAll()
+                    .data(data_rinc)
+                    .enter().append("circle")
+                    .attr("cx", d => x(d.x)+margin*2)
+                    .attr("cy", d => graph_height - h(d.y))
+                    .attr("r", 5)
+                    .style('fill', 'blue');
+
+                d3.select('svg')
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .append("path")
+                    .datum(data_pop)
+                    .attr("class", "line")
+                    .attr("fill", "none")
+                    .attr("stroke", "steelblue")
+                    .attr("stroke-width", 4)
+                    .attr("d", d3.line()
+                        .x(function(d) { return (x(d.x)+margin*2) })
+                        .y(function(d) { return (graph_height - h(d.y)) })
+                        );
+
+                d3.select('svg')
+                    .attr("width", graph_width+margin*2)
+                    .attr("height",graph_height+margin*2)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .selectAll()
+                    .data(data_pop)
+                    .enter().append("circle")
+                    .attr("cx", d => x(d.x)+margin*2)
+                    .attr("cy", d => graph_height - h(d.y))
+                    .attr("r", 5)
+                    .style('fill', 'red');
+
+                d3.select('svg').append('g')
+                    .attr('transform', "translate("+margin+","+margin+")")
+                    .call(d3.axisLeft(y));
+
+                d3.select('svg').append('g')
+                    .attr('transform', "translate("+margin+","+(graph_height+margin)+")")
                     .call(d3.axisBottom(x));
 
             });
