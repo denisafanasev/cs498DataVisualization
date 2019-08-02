@@ -44,7 +44,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Scene Title
+                Scene 1
             </div>
             <div class="card-body">
                 <div>
@@ -55,62 +55,167 @@
                     </svg>
                 </div>
                 <div class=".text-center">
-                    <button type="button" class="btn btn-secondary btn-sm">Small button</button>
-                    <button type="button" class="btn btn-secondary btn-sm">Small button</button>
+                    <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene1_btn" data-scene-num="1">Scene 1</button>
+                    <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene2_btn" data-scene-num="2">Scene 2</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- /.container -->
-    <script> 
-        async function renderGraph() {
-                console.log("function start")
-                const data = await d3.csv('https://flunky.github.io/cars2017.csv');
-                console.log("data download done")
+    <script>
 
-                const margin = 50;
-                const width = 300;
-                const height = 300;
+        var currentScene = 1;
 
-                data.forEach(function(d) {
-                    d.EngineCylinders = + d.EngineCylinders;
-                    d.AverageCityMPG = + d.AverageCityMPG;
-                    d.AverageHighwayMPG = + d.AverageHighwayMPG;
-                });
+        $('body').on('click', '.scene-btn', function(){
+            var sceneTitle =  $(this).text(),
+                sceneNumber = $(this).data('scene-num');
 
-                var graph_width = parseInt(d3.select("svg").style("width").replace("px", ""));
-                console.log(graph_width);
+            currentScene = sceneNumber;
+            console.log(currentScene);
+            $('.card-header').text(sceneTitle);
 
-                var scaleX = d3.scaleLog().domain([10, 150]).range([0, graph_width]).base(10);
-                var scaleY = d3.scaleLog().domain([10, 150]).range([200, 0]).base(10);
+            renderGraph(sceneNumber);
+        });
 
-                d3.select("svg").append("g").attr("transform", "translate(" + 50 + "," + 50 + ")")
+         function renderGraph(sceneNum) {
+
+             d3.select("svg").html('');
+
+             console.log('sceneNum = ' + sceneNum);
+
+             if (sceneNum == 1) {
+                 createBubbleDiagram();
+             }
+
+             if (sceneNum == 2) {
+                 createBarChart();
+             }
+
+
+         }
+
+        async function createBubbleDiagram() {
+            console.log("function start")
+            var data = await d3.csv('https://flunky.github.io/cars2017.csv');
+            console.log("data download done")
+
+            var margin = 50;
+            var width = 300;
+            var height = 300;
+
+            data.forEach(function(d) {
+                d.EngineCylinders = + d.EngineCylinders;
+                d.AverageCityMPG = + d.AverageCityMPG;
+                d.AverageHighwayMPG = + d.AverageHighwayMPG;
+            });
+
+            var graph_width = parseInt(d3.select("svg").style("width").replace("px", ""));
+            console.log(graph_width);
+
+            var scaleX = d3.scaleLog().domain([10, 150]).range([0, graph_width]).base(10);
+            var scaleY = d3.scaleLog().domain([10, 150]).range([200, 0]).base(10);
+
+            d3.select("svg")
+                .attr("width","100%")
+                .attr("height",height)
+                .append("g").attr("transform", "translate(" + 50 + "," + 50 + ")")
 
                 .selectAll()
-                    .data(data)
-                    .enter().append("circle")
-                    .attr("cx", function(d) { return scaleX(d.AverageCityMPG); })
-                    .on("click", function(d) {
-                        console.log(d);
-                    })
-                    .attr("cy", function(d) { return scaleY(d.AverageHighwayMPG); })
-                    .attr("r", function(d, i){return 2 + d.EngineCylinders;});
-                
-                
-                var xAxis = d3.axisBottom(scaleX).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s"));
-                var yAxis = d3.axisLeft(scaleY).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s"));
+                .data(data)
+                .enter().append("circle")
+                .attr("cx", function(d) { return scaleX(d.AverageCityMPG); })
+                .on("click", function(d) {
+                    console.log(d);
+                })
+                .attr("cy", function(d) { return scaleY(d.AverageHighwayMPG); })
+                .attr("r", function(d, i){return 2 + d.EngineCylinders;});
 
-                d3.select('svg').append('g')
+
+            var xAxis = d3.axisBottom(scaleX).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s"));
+            var yAxis = d3.axisLeft(scaleY).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s"));
+
+            d3.select('svg').append('g')
                 .attr('transform', "translate("+margin+","+margin+")")
                 .call(yAxis);
 
-                d3.select('svg').append('g')
+            d3.select('svg').append('g')
                 .attr('transform', "translate("+margin+","+(height-margin)+")")
-                .call(xAxis); 
-                
-            }    
+                .call(xAxis);
+        }
 
-        renderGraph();
+        function createBarChart(){
+
+            d3.csv("data/drilldown_rrinc.csv").then(function(d) {
+
+                var country = "Argentina"
+
+                var currentCountryData_array = [];
+                var Rrinc_max_array = [];
+                var years = [];
+
+                for (var i = 0; i < d.length; i++) {
+                    var currentCountry = d[i].Country;
+
+                    if (currentCountry == country) {
+                        currentCountryData_array.push(d[i]);
+
+                        Rrinc_max_array.push(d[i].Rrinc_max);
+
+                        years.push(d[i].Bin_Year);
+                    }
+                }
+
+                console.log(currentCountryData_array);
+
+                console.log(Rrinc_max_array);
+
+                function getMaxOfArray(numArray) {
+                    return Math.max.apply(null, numArray);
+                }
+
+                var total_Rrinc_max = getMaxOfArray(Rrinc_max_array);
+
+                console.log(total_Rrinc_max);
+
+
+                var data = Rrinc_max_array.map((value, index) => ({x: years[index], y: +value}));
+                console.log('data', data);
+
+                var margin = 50;
+                var width = 1000;
+                var height = 500;
+                var barWidth = 50;
+
+                var x = d3.scaleBand().domain(data.map(p => p.x)).range([0, width]);
+                var y = d3.scaleLinear().domain([0, total_Rrinc_max]).range([height, 0]);
+                var h = d3.scaleLinear().domain([0, total_Rrinc_max]).range([0, height]);
+
+                d3.select('svg')
+                    .attr("width",width+2*margin)
+                    .attr("height",height+2*margin)
+                    .append("g")
+                    .attr("transform","translate("+margin+","+margin+")")
+
+                    .selectAll()
+                    .data(data)
+                    .enter().append("rect")
+                    .attr("x", d => x(d.x) + x.bandwidth() / 2 - barWidth / 2)
+            .attr("y", d => height - h(d.y))
+            .attr("width", barWidth)
+                    .attr("height", d => h(d.y));
+
+                d3.select('svg').append('g')
+                    .attr('transform', "translate("+margin+","+margin+")")
+                    .call(d3.axisLeft(y));
+
+                d3.select('svg').append('g')
+                    .attr('transform', "translate("+margin+","+(height+margin)+")")
+                    .call(d3.axisBottom(x));
+
+            });
+        }
+
+        renderGraph(1);
     </script>
   </body>
 </html>
