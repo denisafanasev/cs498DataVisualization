@@ -187,7 +187,7 @@
 
                 var total_Rrinc_max = getMaxOfArray(Rrinc_max_array);
                 var total_Rrinc_min = getMaxOfArray(Rrinc_min_array);
-                var total_Pop = getMaxOfArray(Pop_array);
+                var total_Pop = getMaxOfArray(Pop_array)*2;
 
                 //console.log(total_Rrinc_max);
 
@@ -200,7 +200,9 @@
                 var x = d3.scaleBand().domain(data_max.map(p => p.x)).range([0, graph_width]);
                 var y = d3.scaleLinear().domain([0, total_Rrinc_max]).range([graph_height, 0]);
                 var h = d3.scaleLinear().domain([0, total_Rrinc_max]).range([0, graph_height]);
-                var p = d3.scaleLinear().domain([0, total_Pop]).range([graph_height, 0]);
+                
+                var yp = d3.scaleLinear().domain([0, total_Pop]).range([graph_height, 0]);
+                var hp = d3.scaleLinear().domain([0, total_Pop]).range([0, graph_height]);
 
                 d3.select('svg')
                     .attr("width", graph_width+margin*2)
@@ -232,8 +234,8 @@
                     .attr("width", barWidth)
                     .attr("height", d => h(d.y));
 
-
-                    d3.select('svg')
+                //выводим линейный график численности населения
+                d3.select('svg')
                     .attr("width", graph_width+margin*2)
                     .attr("height",graph_height+margin*2)
                     .append("g")
@@ -247,9 +249,10 @@
                     .attr("stroke-width", 4)
                     .attr("d", d3.line()
                         .x(function(d) { return (x(d.x)+margin*2) })
-                        .y(function(d) { return (graph_height - p(d.y)) })
+                        .y(function(d) { return (graph_height - hp(d.y)) })
                         );
 
+                //выводим точки на графике численности населения
                 d3.select('svg')
                     .attr("width", graph_width+margin*2)
                     .attr("height",graph_height+margin*2)
@@ -260,13 +263,13 @@
                     .data(data_pop)
                     .enter().append("circle")
                     .attr("cx", d => x(d.x)+margin*2)
-                    .attr("cy", d => graph_height - p(d.y))
+                    .attr("cy", d => graph_height - hp(d.y))
                     .attr("r", 5)
                     .style('fill', 'red');
 
                 d3.select('svg').append('g')
                     .attr('transform', "translate("+(graph_width+margin)+","+margin+")")
-                    .call(d3.axisRight(p));
+                    .call(d3.axisRight(yp));
 
                 d3.select('svg').append('g')
                     .attr('transform', "translate("+margin+","+margin+")")
