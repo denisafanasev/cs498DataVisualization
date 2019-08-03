@@ -43,11 +43,11 @@
     <!-- Page Content -->
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div id="scene_title" class="card-header">
                 Scene 1
             </div>
             <div class="card-body">
-                <div>
+                <div id="scene_description">
                     Scene description <br><br>
                 </div>
                 <div>
@@ -113,21 +113,21 @@
             //console.log('sceneNum = ' + sceneNum);
             
             if (sceneNum == 1) {
-                $('.card-header').text("Overview");
+                $('.card-header').text("Scene 1: Overview");
                 document.getElementById('subscene_prev_btn').style.visibility = "hidden";
                 document.getElementById('subscene_next_btn').style.visibility = "hidden";
                 createBubbleDiagram();
             }
 
             if (sceneNum == 2) {
-                $('.card-header').text("Absolute values drilldown");
+                $('.card-header').text("Scene 2 - Subscene "+currentSubScene+": Absolute values drilldown for " + country);
                 document.getElementById('subscene_prev_btn').style.visibility = "visible";
                 document.getElementById('subscene_next_btn').style.visibility = "visible";
                 createBarChartAbsolute();
             }
 
             if (sceneNum == 3) {
-                $('.card-header').text("Relative values drilldown");
+                $('.card-header').text("Scene 3 - Subscene "+currentSubScene+": Relative values drilldown for " + country);
                 document.getElementById('subscene_prev_btn').style.visibility = "visible";
                 document.getElementById('subscene_next_btn').style.visibility = "visible";
                 createBarChartRelative();
@@ -348,8 +348,8 @@
                 //console.log(currentCountryData_array);
                 //console.log(Rrinc_max_array);
 
-                var total_Rrinc = getMaxOfArray(Rrinc_array);
-                var total_Pop = getMaxOfArray(Pop_array);
+                var total_Rrinc = 2;
+                var total_Pop = 2;
 
                 //console.log(total_Rrinc_max);
 
@@ -372,7 +372,7 @@
                     .datum(data_rinc)
                     .attr("class", "line")
                     .attr("fill", "none")
-                    .attr("stroke", "steelblue")
+                    .attr("stroke", "blue")
                     .attr("stroke-width", 4)
                     .attr("d", d3.line()
                         .x(function(d) { return (x(d.x)+margin*2) })
@@ -403,7 +403,7 @@
                     .datum(data_pop)
                     .attr("class", "line")
                     .attr("fill", "none")
-                    .attr("stroke", "steelblue")
+                    .attr("stroke", "red")
                     .attr("stroke-width", 4)
                     .attr("d", d3.line()
                         .x(function(d) { return (x(d.x)+margin*2) })
