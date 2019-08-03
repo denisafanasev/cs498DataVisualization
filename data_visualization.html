@@ -47,8 +47,8 @@
                 Scene 1
             </div>
             <div class="card-body">
-                <div id="scene_description">
-                    Scene description <br><br>
+                <div>
+                    <small id="scene_description"></small>
                 </div>
                 <div>
                     <svg height=500 width="100%" id="graph">
@@ -114,6 +114,7 @@
             
             if (sceneNum == 1) {
                 $('.card-header').text("Scene 1: Overview");
+                document.getElementById("scene_description").innerHTML = "In order to investigate the connection between the change in population size and the change in the difference in income between the richest and poorest people we have constructed a graph plotting the change in income level over 10 years from the population size over 10 years (from 1988 to 2008). It is expected that in the case of such a link, the countries with the largest change in the population level would have the greatest change in the difference in incomes of the population. But the graph shows that this dependence is absent, because the scatter of countries is not dependent on these 2 parameters.";
                 document.getElementById('subscene_prev_btn').style.visibility = "hidden";
                 document.getElementById('subscene_next_btn').style.visibility = "hidden";
                 createBubbleDiagram();
@@ -121,6 +122,7 @@
 
             if (sceneNum == 2) {
                 $('.card-header').text("Scene 2 - Subscene "+currentSubScene+": Absolute values drilldown for " + country);
+                document.getElementById("scene_description").innerHTML = "As you can see, this graph clearly shows that there is no direct relationship between the absolute level of change in population and the absolute level of change in income between the poorest and richest segments of the population.";
                 document.getElementById('subscene_prev_btn').style.visibility = "visible";
                 document.getElementById('subscene_next_btn').style.visibility = "visible";
                 createBarChartAbsolute();
@@ -128,6 +130,7 @@
 
             if (sceneNum == 3) {
                 $('.card-header').text("Scene 3 - Subscene "+currentSubScene+": Relative values drilldown for " + country);
+                document.getElementById("scene_description").innerHTML = "As you can see, this graph clearly shows that there is no direct relationship between the relative level of change in population and the relative level of change in income between the poorest and richest segments of the population.";
                 document.getElementById('subscene_prev_btn').style.visibility = "visible";
                 document.getElementById('subscene_next_btn').style.visibility = "visible";
                 createBarChartRelative();
