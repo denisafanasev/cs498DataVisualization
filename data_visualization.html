@@ -58,6 +58,9 @@
                     <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene1_btn" data-scene-num="1">Overview</button>
                     <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene2_btn" data-scene-num="2">Absolute values drilldown</button>
                     <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene3_btn" data-scene-num="3">Relative values drilldown</button>
+                    
+                    <button type="button" class="btn btn-secondary btn-sm" id="subscene_prev_btn" data-scene-num="1"> Prevous contry</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="subscene_next_btn" data-scene-num="2">Next country</button>           
                 </div>
             </div>
         </div>
@@ -66,6 +69,14 @@
     <script>
 
         var currentScene = 1;
+        var currentSubScene = 1;
+        var country = "China"
+
+        function numberToCountry(subSceneNum) {
+            if(subSceneNum==1){ country = "China"; }
+            if(subSceneNum==2){ country = "Nigeria"; }
+            if(subSceneNum==3){ country = "United States"; }
+        }
 
         $('body').on('click', '.scene-btn', function(){
             var sceneTitle =  $(this).text(),
@@ -77,6 +88,24 @@
             renderScene(sceneNumber);
         });
 
+        document.getElementById("subscene_next_btn").onclick = function(){
+            currentSubScene = currentSubScene + 1;
+            if (currentSubScene > 3) {
+                currentSubScene = 1;
+            }
+            numberToCountry(currentSubScene);
+            renderScene(currentScene);
+        }
+
+        document.getElementById("subscene_prev_btn").onclick = function(){
+            currentSubScene = currentSubScene - 1;
+            if (currentSubScene == 0) {
+                currentSubScene = 3;
+            }
+            numberToCountry(currentSubScene);
+            renderScene(currentScene);
+        }
+
         function renderScene(sceneNum) {
 
             d3.select("svg").html('');
@@ -85,16 +114,22 @@
             
             if (sceneNum == 1) {
                 $('.card-header').text("Overview");
+                document.getElementById('subscene_prev_btn').style.visibility = "hidden";
+                document.getElementById('subscene_next_btn').style.visibility = "hidden";
                 createBubbleDiagram();
             }
 
             if (sceneNum == 2) {
                 $('.card-header').text("Absolute values drilldown");
+                document.getElementById('subscene_prev_btn').style.visibility = "visible";
+                document.getElementById('subscene_next_btn').style.visibility = "visible";
                 createBarChartAbsolute();
             }
 
             if (sceneNum == 3) {
                 $('.card-header').text("Relative values drilldown");
+                document.getElementById('subscene_prev_btn').style.visibility = "visible";
+                document.getElementById('subscene_next_btn').style.visibility = "visible";
                 createBarChartRelative();
             }
         }
@@ -148,9 +183,6 @@
         }
 
         function createBarChartAbsolute(){
-
-            var country = "China"
-
             var margin = 50;
             var graph_width = parseInt(d3.select("svg").style("width").replace("px", ""))-margin*2;
             var graph_height = parseInt(d3.select("svg").style("height").replace("px", ""))-margin*2;
@@ -284,9 +316,6 @@
 
 
         function createBarChartRelative(){
-
-            var country = "China"
-
             var margin = 50;
             var graph_width = parseInt(d3.select("svg").style("width").replace("px", ""))-margin*2;
             var graph_height = parseInt(d3.select("svg").style("height").replace("px", ""))-margin*2;
