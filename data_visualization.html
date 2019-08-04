@@ -73,9 +73,9 @@
                     </svg>
                 </div>
                 <div class=".text-center">
-                    <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene1_btn" data-scene-num="1">Overview</button>
-                    <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene2_btn" data-scene-num="2">Absolute values drilldown</button>
-                    <button type="button" class="btn btn-secondary btn-sm scene-btn" id="scene3_btn" data-scene-num="3">Relative values drilldown</button>
+                    <button type="button" class="btn btn-primary btn-sm scene-btn" id="scene1_btn" data-scene-num="1">Overview</button>
+                    <button type="button" class="btn btn-success btn-sm scene-btn" id="scene2_btn" data-scene-num="2">Absolute values drilldown</button>
+                    <button type="button" class="btn btn-success btn-sm scene-btn" id="scene3_btn" data-scene-num="3">Relative values drilldown</button>
                     
                     <button type="button" class="btn btn-secondary btn-sm" id="subscene_prev_btn" data-scene-num="1"> Prevous contry</button>
                     <button type="button" class="btn btn-secondary btn-sm" id="subscene_next_btn" data-scene-num="2">Next country</button>           
@@ -132,25 +132,40 @@
             
             if (sceneNum == 1) {
                 $('.card-header').text("Scene 1: Overview");
+                
                 document.getElementById("scene_description").innerHTML = "In order to investigate the connection between the change in population size and the change in the difference in income between the richest and poorest people we have constructed a graph plotting the change in income level over 10 years from the population size over 10 years (from 1988 to 2008). It is expected that in the case of such a link, the countries with the largest change in the population level would have the greatest change in the difference in incomes of the population. But the graph shows that this dependence is absent, because the scatter of countries is not dependent on these 2 parameters.";
                 document.getElementById('subscene_prev_btn').style.visibility = "hidden";
                 document.getElementById('subscene_next_btn').style.visibility = "hidden";
+                document.getElementById('scene1_btn').style.visibility = "hidden";
+                document.getElementById('scene2_btn').style.visibility = "visible";
+                document.getElementById('scene3_btn').style.visibility = "visible";
+                
                 createBubbleDiagram();
             }
 
             if (sceneNum == 2) {
                 $('.card-header').text("Scene 2 - Subscene "+currentSubScene+": Absolute values drilldown for " + country);
+                
                 document.getElementById("scene_description").innerHTML = "As you can see, this graph clearly shows that there is no direct relationship between the absolute level of change in population and the absolute level of change in income between the poorest and richest segments of the population.";
                 document.getElementById('subscene_prev_btn').style.visibility = "visible";
                 document.getElementById('subscene_next_btn').style.visibility = "visible";
+                document.getElementById('scene1_btn').style.visibility = "visible";
+                document.getElementById('scene2_btn').style.visibility = "hidden";
+                document.getElementById('scene3_btn').style.visibility = "hidden";
+
                 createBarChartAbsolute();
             }
 
             if (sceneNum == 3) {
                 $('.card-header').text("Scene 3 - Subscene "+currentSubScene+": Relative values drilldown for " + country);
+                
                 document.getElementById("scene_description").innerHTML = "As you can see, this graph clearly shows that there is no direct relationship between the relative level of change in population and the relative level of change in income between the poorest and richest segments of the population.";
                 document.getElementById('subscene_prev_btn').style.visibility = "visible";
                 document.getElementById('subscene_next_btn').style.visibility = "visible";
+                document.getElementById('scene1_btn').style.visibility = "visible";
+                document.getElementById('scene2_btn').style.visibility = "hidden";
+                document.getElementById('scene3_btn').style.visibility = "hidden";
+                
                 createBarChartRelative();
             }
         }
@@ -233,7 +248,7 @@
                 var mousemove = function(d) {
 
                     tooltip
-                        .html("<b>" + d.Country + "</b><br>PopDiffP: " + d.PopDiffP + "<br>RIncDiffP: " + d.RIncDiffP + "<br>Totpop: " + d.Totpop)
+                        .html("<b>" + d.Country + "</b><br>relative change in population: " + d.PopDiffP + "<br>relative change in income difference: " + d.RIncDiffP + "<br>population in 2008: " + d.Totpop + "M")
                         .style("left", (d3.mouse(this)[0]+90) + "px")
                         .style("top", (d3.mouse(this)[1] + 120) + "px")
                         .style("background-color", "rgba(255,255,255, 0.7)")
@@ -385,13 +400,9 @@
                 var total_Rrinc_min = getMaxOfArray(Rrinc_min_array);
                 var total_Pop = getMaxOfArray(Pop_array)*2;
 
-                //console.log(total_Rrinc_max);
-
                 var data_max = Rrinc_max_array.map((value, index) => ({x: years[index], y: +value}));
                 var data_min = Rrinc_min_array.map((value, index) => ({x: years[index], y: +value}));
                 var data_pop = Pop_array.map((value, index) => ({x: years[index], y: +value}));
-                //console.log('data_max', data_max);
-                //console.log('data_min', data_min);
 
                 console.log(data_max);
                 var x = d3.scaleBand().domain(data_max.map(p => p.x)).range([0, graph_width]);
@@ -511,37 +522,53 @@
 
                 /**** Tooltips ****/
 
-                var tooltip = d3.select(".card-body")
+                var tooltip_orange = d3.select(".card-body")
                     .append("div")
                     .style("position", "absolute")
                     .style("font-size", "12px")
                     .style("visibility", "hidden");
 
                 var mousemove = function(d) {
-                    tooltip
-                        .html(d.y)
+                    tooltip_orange
+                        .html("income difference: $" + d.y)
                         .style("left", (d3.mouse(this)[0] + 80) + "px")
                         .style("top", (d3.mouse(this)[1] + 130) + "px")
                         .style("background-color", "rgba(255,255,255, 0.7)")
                         .style("padding", "5px")
                         .style("border-radius", "5px")
                 }
-
-                // Bind tooltips to line chart dots
-
-                d3.selectAll(".chart-dot")
-                    .on("mouseover", function(){return tooltip.style("visibility", "visible");})
-                    .on("mousemove", mousemove )
-                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
-
+  
                 // Bind tooltips to line orange bars
 
                 d3.selectAll(".orange-bar")
-                    .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+                    .on("mouseover", function(){return tooltip_orange.style("visibility", "visible");})
                     .on("mousemove", mousemove )
-                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+                    .on("mouseout", function(){return tooltip_orange.style("visibility", "hidden");});
 
+                
+                var tooltip_dot = d3.select(".card-body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("font-size", "12px")
+                    .style("visibility", "hidden");
 
+                var mousemove = function(d) {
+                    tooltip_dot
+                        .html("population: " + d.y)
+                        .style("left", (d3.mouse(this)[0] + 80) + "px")
+                        .style("top", (d3.mouse(this)[1] + 130) + "px")
+                        .style("background-color", "rgba(255,255,255, 0.7)")
+                        .style("padding", "5px")
+                        .style("border-radius", "5px")
+                }
+            
+                // Bind tooltips to line chart dots
+
+                d3.selectAll(".chart-dot")
+                    .on("mouseover", function(){return tooltip_dot.style("visibility", "visible");})
+                    .on("mousemove", mousemove )
+                    .on("mouseout", function(){return tooltip_dot.style("visibility", "hidden");});
+                
                 /*******  Anotations  ********/
 
                     // Orange bar
