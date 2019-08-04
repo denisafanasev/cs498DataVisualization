@@ -78,19 +78,19 @@
     <div class="p-3">
         <h5 class="mt-4"> Scene 1: </h5>
         <p>
-            This slide shows a summary of all countries on the scoreplot graph.<br><br>
+            This slide shows a summary of all countries on the scoreplot graph.<br>
 
             <ul>
-                <li> Axis X (Totpop) population in 2008</li>
-                <li>Axis Y-axis (RRincMax) is the highest per capita GDP in 2008 for the richest segments of the population.</li>
+                <li><strong>Axis X</strong> - relative change in population over 10 years (from 1988 to 2008)</li>
+                <li><strong>Axis Y</strong> - relative change in income difference over 10 years (from 1988 to 2008)</li>
+                <li><strong>Axis Z</strong> - population in 2008</li>
             </ul>
-
-            At the intersection of these indicators is the country where the radius (RIncDiffP) - the relative change in 
-            GDP in the country to the level of 1998 (over a period of 10 years). <br>
 
             Below the graph there are 2 buttons that allow the user to switch to a detailed study of the dynamics 
             of the indicators for each country of his choice. To go to the graph, the user has to select a country and 
             click the corresponding button. <br>
+
+            The graph shows annotations and detailed data in the form of tooltips.
         </p>
 
         <h5 class="mt-4"> Scene 2: </h5>
@@ -98,10 +98,13 @@
             This slide shows the visualization of absolute population size and the difference between GDP per capita 
             for the poorest and wealthiest segments of the population. <br>
             
-            The left (linear) chart shows the number of population depending on the year. <br>
+            The linear chart shows the number of population depending on the year. <br>
                 
-            The right (barchart) chart shows the levels of GDP per capita for the poorest and richest segments of 
+            The barchart chart shows the levels of GDP per capita for the poorest and richest segments of 
             the population for each year of measurement of these indicators. <br>
+
+            User can navigate between countries using the navigation buttons below the graph. The graph shows 
+            annotations and detailed data in the form of tooltips.
         </p>
 
 
@@ -110,10 +113,12 @@
             This slide shows the relative size of the population and the difference between GDP per capita for the poorest 
             and wealthiest segments of the population. <br>
 
-            The graph (barchart) shows the level of change in GDP per capita for the poorest and wealthiest segments 
-            of the population for each year of measurement and the level of change in population size. <br>
+            The red line shows the level of change in GDP per capita for the poorest and wealthiest segments 
+            of the population for each year of measurement and the blue line shows changes in population size. <br>
 
             The graph illustrates the relationship between these indicators.
+            User can navigate between countries using the navigation buttons below the graph. The graph shows 
+            annotations and detailed data in the form of tooltips.
         </p>
     </div>
 
@@ -123,15 +128,15 @@
     the location of the scene (i.e. a single chart with subsequent descriptions), the alignment of charts and text 
     for to provide a consistent visualization sequence. Scene names, axes and legends are given in all scenes, 
     to help the audience understand the data. Slide numbers as well as back and forth buttons also are used to 
-    facilitate navigation between scenes. Annotations are also provided to Help the user to focus on important parts 
-    of the charts.</p>
+    facilitate navigation between scenes. Annotations are also provided to help the user to focus on important parts 
+    of the charts. There are data detalization in the form of tooltips on each graph</p>
 
     <h4 class="mt-4">Scenes</h4>
 
-    <p align="justify">My narrative visualization has three main scenes, including the opening scene and two drilldown scenes. 
-    They all use the same scene template. Starting and ending point of visualization is the main stage. The second 
-    and third scene are independent and the user chooses, 
-    to which one of them it is necessary to make the transition from the main stage. 
+    <p align="justify">My narrative visualization has three main scenes (and 3 subscene for scenes 2 and 3), 
+    including the opening scene and two drilldown scenes. 
+    They all use the same scene template. The second and third scene are independent and the user chooses, 
+    to which one of them it is necessary to make the transition from the main stage (from Scene 1). 
     In other words, viewers can put forward a hypothesis (e.g., a change in the GDP per capita difference 
     between the poorest and wealthiest segments of the population depend on the size of the population of a given country) 
     on the main stage, which can then be tested on stage 2 or 3 at the user's choice.</p>
@@ -149,14 +154,16 @@
     who control the fortune. Narrative visualization states include scene 1, scene 2, scene 3. 
     The status and scene are defined by the numbers after the word "scene". For example, the "scene 3" parameter 
     indicates that the state is the third scene. The "scene" parameter is displayed on scene 1, 2 and 3, the "country" 
-    parameter is displayed on scene 2 and 3.</p>
+    parameter is displayed on scene 2 and 3.
+    The second parametr is country. User can navigate by each country for detalization in Scenes 2 and 3 via navigation buttons.<br>
+    All parameteres showed in the title of the scene.</p>
 
     <h4 class="mt-4">Triggers</h4>
 
-    <p align="justify">The slide number, the Back button, the Absolute Values Watch button and the Relative Values Watch button 
+    <p align="justify">The slide number, the Ovweview button, the Absolute Values  button and the Relative Values, Previous contry and Next country button 
     are triggers that link user actions to changes in the narrative visualization state. 
-    Buttons are displayed at the bottom of the page in the form of blue rectangles and white text, 
-    informing viewers about the possibility of moving back and forth between the main scenes, if any.</p>
+    Buttons are displayed at the bottom of the page in the form of colored rectangles with white text, 
+    informing viewers about the possibility of moving back and forth between the scenes, if any.</p>
 
     <form action="data_visualization.html">
         <input class="btn btn-dark" type="submit" value="Go to visualization" />
