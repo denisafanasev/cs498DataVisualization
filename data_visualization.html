@@ -15,7 +15,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
     <script src='https://d3js.org/d3.v5.min.js'></script>
-    <style> circle {fill: lightblue; stroke: black;} </style>
+    <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+    <style>
+
+        circle {fill: lightblue; stroke: black;}
+        .annotation-note-label {
+            font-size: 13px;
+            font-family: Georgia, "Times New Roman", Times, serif;;
+        }
+
+        circle#China, circle#Nigeria, circle[id="United States"] {
+            fill: red;
+        }
+
+        .container, .navbar {
+            min-width: 1140px;
+        }
+
+
+    </style>
     <!-- Custom styles for this template -->
   </head>
 
@@ -182,6 +200,149 @@
                 d3.select('svg').append('g')
                     .attr('transform', "translate("+margin+","+(graph_height+10)+")")
                     .call(xAxis);
+
+                /**** Axes naming ****/
+
+                d3.select('svg').append("text")
+                    .attr("transform","translate(520, 485)")
+                    .style("text-anchor", "middle")
+                    .style("font-family", "Georgia, Times New Roman, Times, serif")
+                    .attr("fill", "#999")
+                    .attr("font-size", "16")
+                    .text("Relative change in population");
+
+                d3.select('svg').append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 50)
+                    .attr("x", -240 )
+                    .style("text-anchor", "middle")
+                    .style("font-family", "Georgia, Times New Roman, Times, serif")
+                    .attr("fill", "#999")
+                    .attr("font-size", "16")
+                    .text("Relative change in income difference");
+
+
+                /**** Tooltips ****/
+
+                var tooltip = d3.select(".card-body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("font-size", "12px")
+                    .style("visibility", "hidden");
+
+                var mousemove = function(d) {
+
+                    tooltip
+                        .html("<b>" + d.Country + "</b><br>PopDiffP: " + d.PopDiffP + "<br>RIncDiffP: " + d.RIncDiffP + "<br>Totpop: " + d.Totpop)
+                        .style("left", (d3.mouse(this)[0]+90) + "px")
+                        .style("top", (d3.mouse(this)[1] + 120) + "px")
+                        .style("background-color", "rgba(255,255,255, 0.7)")
+                        .style("padding", "5px")
+                        .style("border-radius", "5px")
+                }
+
+
+                d3.selectAll("circle")
+                    .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+                    .on("mousemove", mousemove )
+                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+
+                /*******  Anotations  ********/
+
+                    // Nigeria
+
+                var annotation_Nigeria = [
+                        {
+                            note: {
+                                label: "Here is the annotation label",
+                                title: "Nigeria",
+                                align: "left",
+                            },
+                            connector: {
+                                end: "none",        // none, or arrow or dot
+                                type: "line",       // Line or curve
+                                points: 3,           // Number of break in the curve
+                                lineType : "horizontal"
+                            },
+                            color: ["#267307"],
+                            x: 675,
+                            y: 270,
+                            dy: -100,
+                            dx: 100
+                        }
+                    ]
+
+                // Add annotation to the chart
+                const makeAnnotations1 = d3.annotation()
+                    .annotations(annotation_Nigeria);
+                d3.select("svg")
+                    .append("g")
+                    .call(makeAnnotations1);
+
+
+                // China
+
+                var annotation_China = [
+                    {
+                        note: {
+                            label: "Here is the annotation label",
+                            title: "China",
+                            align: "right",
+                        },
+                        connector: {
+                            end: "none",        // none, or arrow or dot
+                            type: "line",       // Line or curve
+                            points: 3,           // Number of break in the curve
+                            lineType : "horizontal"
+                        },
+                        color: ["#267307"],
+                        x: 340,
+                        y: 80,
+                        dy: 100,
+                        dx: -150
+                    }
+                ]
+
+                // Add annotation to the chart
+                const makeAnnotations2 = d3.annotation()
+                    .annotations(annotation_China);
+                d3.select("svg")
+                    .append("g")
+                    .call(makeAnnotations2);
+
+
+                // USA
+
+                var annotation_USA = [
+                    {
+                        note: {
+                            label: "Here is the annotation label",
+                            title: "USA",
+                            align: "right",
+                        },
+                        connector: {
+                            end: "none",        // none, or arrow or dot
+                            type: "line",       // Line or curve
+                            points: 3,           // Number of break in the curve
+                            lineType : "horizontal"
+                        },
+                        color: ["#267307"],
+                        x: 465,
+                        y: 220,
+                        dy: -150,
+                        dx: 150
+                    }
+                ]
+
+                // Add annotation to the chart
+                const makeAnnotations3 = d3.annotation()
+                    .annotations(annotation_USA);
+                d3.select("svg")
+                    .append("g")
+                    .call(makeAnnotations3);
+
+
             });
         }
 
@@ -232,7 +393,9 @@
                 //console.log('data_max', data_max);
                 //console.log('data_min', data_min);
 
+                console.log(data_max);
                 var x = d3.scaleBand().domain(data_max.map(p => p.x)).range([0, graph_width]);
+                console.log(x);
                 var y = d3.scaleLinear().domain([0, total_Rrinc_max]).range([graph_height, 0]);
                 var h = d3.scaleLinear().domain([0, total_Rrinc_max]).range([0, graph_height]);
                 
@@ -248,6 +411,7 @@
                     .selectAll()
                     .data(data_max)
                     .enter().append("rect")
+                    .attr("class", "orange-bar")
                     .attr("x", d => x(d.x) + x.bandwidth() / 2 - barWidth / 2)
                     .attr("y", d => graph_height - h(d.y))
                     .attr('fill', 'orange')
@@ -300,6 +464,7 @@
                     .attr("cx", d => x(d.x)+margin*2)
                     .attr("cy", d => graph_height - hp(d.y))
                     .attr("r", 5)
+                    .attr("class", "chart-dot")
                     .style('fill', 'red');
 
                 d3.select('svg').append('g')
@@ -313,6 +478,138 @@
                 d3.select('svg').append('g')
                     .attr('transform', "translate("+margin+","+(graph_height+margin)+")")
                     .call(d3.axisBottom(x));
+
+                /**** Axes naming ****/
+
+                d3.select('svg').append("text")
+                    .attr("transform","translate(520, 480)")
+                    .style("text-anchor", "middle")
+                    .style("font-family", "Georgia, Times New Roman, Times, serif")
+                    .attr("fill", "#5D6971")
+                    .attr("font-size", "16")
+                    .text("Years");
+
+                d3.select('svg').append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 65)
+                    .attr("x", -240 )
+                    .style("text-anchor", "middle")
+                    .style("font-family", "Georgia, Times New Roman, Times, serif")
+                    .attr("fill", "#5D6971")
+                    .attr("font-size", "16")
+                    .text("Income");
+
+                d3.select('svg').append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 1010)
+                    .attr("x", -240 )
+                    .style("text-anchor", "middle")
+                    .style("font-family", "Georgia, Times New Roman, Times, serif")
+                    .attr("fill", "#5D6971")
+                    .attr("font-size", "16")
+                    .text("Population");
+
+                /**** Tooltips ****/
+
+                var tooltip = d3.select(".card-body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("font-size", "12px")
+                    .style("visibility", "hidden");
+
+                var mousemove = function(d) {
+                    tooltip
+                        .html(d.y)
+                        .style("left", (d3.mouse(this)[0] + 80) + "px")
+                        .style("top", (d3.mouse(this)[1] + 130) + "px")
+                        .style("background-color", "rgba(255,255,255, 0.7)")
+                        .style("padding", "5px")
+                        .style("border-radius", "5px")
+                }
+
+                // Bind tooltips to line chart dots
+
+                d3.selectAll(".chart-dot")
+                    .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+                    .on("mousemove", mousemove )
+                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+                // Bind tooltips to line orange bars
+
+                d3.selectAll(".orange-bar")
+                    .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+                    .on("mousemove", mousemove )
+                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+
+                /*******  Anotations  ********/
+
+                    // Orange bar
+
+                var makeAnnotationsOrangeBar = d3.annotation()
+                    .annotations(data_max.map((d,i) => {
+                        //console.log(d);
+                        if (i == 3) {
+                            return {
+                                note: {
+                                    label: "Here is the annotation label",
+                                    title: d.x,
+                                    align: "right",
+                                    orientation: "fixed"
+                                },
+                                connector: {
+                                    end: "none",
+                                    type: "line",
+                                    points: 3,
+                                    lineType : "horizontal"
+                                },
+                                x: x(d.x) + x.bandwidth() / 2 + barWidth / 2,
+                                y: graph_height - h(d.y) + margin - 5,
+                                dy: -20,
+                                dx: 0,
+                                color: ["#267307"]
+                            }
+                        }
+                        else return {};
+
+                    }));
+                d3.select("svg")
+                    .append("g")
+                    .call(makeAnnotationsOrangeBar);
+
+                // Line chart
+
+                var makeAnnotationsLineChart = d3.annotation()
+                    .annotations(data_pop.map((d,i) => {
+                        console.log(d);
+                if (i == 1) {
+                    return {
+                        note: {
+                            label: "Here is the annotation label",
+                            title: "Annotation for the line chart",
+                            align: "left",
+                            orientation: "fixed"
+                        },
+                        connector: {
+                            end: "none",
+                            type: "line",
+                            points: 3,
+                            lineType : "horizontal"
+                        },
+                        x: x(d.x)+margin*3,
+                        y: graph_height - hp(d.y) +margin,
+                        dy: -80,
+                        dx: 80,
+                        color: ["#267307"]
+                    }
+                }
+                else return {};
+
+            }));
+                d3.select("svg")
+                    .append("g")
+                    .call(makeAnnotationsLineChart);
+
 
             });
         }
@@ -391,6 +688,7 @@
                     .selectAll()
                     .data(data_rinc)
                     .enter().append("circle")
+                    .attr("class", "chart-dot")
                     .attr("cx", d => x(d.x)+margin*2)
                     .attr("cy", d => graph_height - h(d.y))
                     .attr("r", 5)
@@ -422,6 +720,7 @@
                     .selectAll()
                     .data(data_pop)
                     .enter().append("circle")
+                    .attr("class", "chart-dot")
                     .attr("cx", d => x(d.x)+margin*2)
                     .attr("cy", d => graph_height - h(d.y))
                     .attr("r", 5)
@@ -434,6 +733,122 @@
                 d3.select('svg').append('g')
                     .attr('transform', "translate("+margin+","+(graph_height+margin)+")")
                     .call(d3.axisBottom(x));
+
+
+                /**** Axes naming ****/
+
+                d3.select('svg').append("text")
+                    .attr("transform","translate(520, 480)")
+                    .style("text-anchor", "middle")
+                    .style("font-family", "Georgia, Times New Roman, Times, serif")
+                    .attr("fill", "#5D6971")
+                    .attr("font-size", "16")
+                    .text("Years");
+
+                d3.select('svg').append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 65)
+                    .attr("x", -240 )
+                    .style("text-anchor", "middle")
+                    .style("font-family", "Georgia, Times New Roman, Times, serif")
+                    .attr("fill", "#5D6971")
+                    .attr("font-size", "16")
+                    .text("Relative change to previous year");
+
+
+                /**** Tooltips ****/
+
+                var tooltip = d3.select(".card-body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("font-size", "12px")
+                    .style("visibility", "hidden");
+
+                var mousemove = function(d) {
+                    tooltip
+                        .html(d.y)
+                        .style("left", (d3.mouse(this)[0] + 80) + "px")
+                        .style("top", (d3.mouse(this)[1] + 130) + "px")
+                        .style("background-color", "rgba(255,255,255, 0.7)")
+                        .style("padding", "5px")
+                        .style("border-radius", "5px")
+                }
+
+                // Bind tooltips to line chart dots
+
+                d3.selectAll(".chart-dot")
+                    .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+                    .on("mousemove", mousemove )
+                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+
+                /*******  Anotations  ********/
+
+                    // Blue line
+
+                var makeAnnotationsBlueLine = d3.annotation()
+                    .annotations(data_rinc.map((d,i) => {
+                        console.log(d);
+                if (i == 1) {
+                    return {
+                        note: {
+                            label: "Here is the annotation label",
+                            title: "Annotation for the blue line",
+                            align: "left",
+                            orientation: "fixed"
+                        },
+                        connector: {
+                            end: "none",
+                            type: "line",
+                            points: 3,
+                            lineType : "horizontal"
+                        },
+                        x: x(d.x)+margin*3,
+                        y: graph_height - h(d.y) +margin,
+                        dy: -80,
+                        dx: 80,
+                        color: ["blue"]
+                    }
+                }
+                else return {};
+
+            }));
+                d3.select("svg")
+                    .append("g")
+                    .call(makeAnnotationsBlueLine);
+
+                // Red line
+
+                var makeAnnotationsRedLine = d3.annotation()
+                    .annotations(data_pop.map((d,i) => {
+
+                if (i == 2) {
+                    return {
+                        note: {
+                            label: "Here is the annotation label",
+                            title: "Annotation for the red line",
+                            align: "right",
+                            orientation: "fixed"
+                        },
+                        connector: {
+                            end: "none",
+                            type: "line",
+                            points: 3,
+                            lineType : "horizontal"
+                        },
+                        x: x(d.x)+margin*3,
+                        y: graph_height - h(d.y) +margin,
+                        dy: 80,
+                        dx: -80,
+                        color: ["red"]
+                    }
+                }
+                else return {};
+
+            }));
+                d3.select("svg")
+                    .append("g")
+                    .call(makeAnnotationsRedLine);
 
             });
         }
