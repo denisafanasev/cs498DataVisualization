@@ -43,7 +43,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                CS498 Data visualization: data visualization
+                CS498 Data visualization: visualization part
             </a>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
@@ -61,9 +61,11 @@
     <!-- Page Content -->
     <div class="container">
         <div class="card">
-            <div id="scene_title" class="card-header">
-                Scene 1
-            </div>
+            <strong>
+                <div id="scene_title" class="card-header">
+                    Scene 1: Overview
+                </div>
+            </strong>
             <div class="card-body">
                 <div>
                     <small id="scene_description"></small>
@@ -101,8 +103,7 @@
                 sceneNumber = $(this).data('scene-num');
 
             currentScene = sceneNumber;
-            //console.log(currentScene);
-            //$('.card-header').text(sceneTitle);
+
             renderScene(sceneNumber);
         });
 
@@ -127,13 +128,19 @@
         function renderScene(sceneNum) {
 
             d3.select("svg").html('');
-
-            //console.log('sceneNum = ' + sceneNum);
             
             if (sceneNum == 1) {
                 $('.card-header').text("Scene 1: Overview");
                 
-                document.getElementById("scene_description").innerHTML = "In order to investigate the connection between the change in population size and the change in the difference in income between the richest and poorest people we have constructed a graph plotting the change in income level over 10 years from the population size over 10 years (from 1988 to 2008). It is expected that in the case of such a link, the countries with the largest change in the population level would have the greatest change in the difference in incomes of the population. But the graph shows that this dependence is absent, because the scatter of countries is not dependent on these 2 parameters.";
+                document.getElementById("scene_description").innerHTML = "In order to investigate the connection between the change in population size and the "+
+                "change in the difference in income between the richest and poorest people we have constructed a graph plotting "+
+                "the change in income level over 10 years from the population size over 10 years (from 1988 to 2008). It is expected"+
+                " that in the case of such a link, the countries with the largest change in the population level would have the "+
+                "greatest change in the difference in incomes of the population. But the graph shows that this dependence is absent,"+
+                " because the scatter of countries is not dependent on these 2 parameters." +
+                "The graph highlights 3 countries that most clearly demonstrate this. You can exhaust these countries in more "+
+                "detail both in absolute and relative values.";
+
                 document.getElementById('subscene_prev_btn').style.visibility = "hidden";
                 document.getElementById('subscene_next_btn').style.visibility = "hidden";
                 document.getElementById('scene1_btn').style.visibility = "hidden";
@@ -171,16 +178,13 @@
         }
 
         function createBubbleDiagram() {
-            //console.log("function start");
 
             d3.csv('data/overview_data.csv').then(function(data) {
-                //console.log("data download done");
 
                 data.forEach(function(d) {
                     d.RIncDiffP = parseFloat(d.RIncDiffP);
                     d.PopDiffP = parseFloat(d.PopDiffP);
                     d.Totpop = parseFloat(d.Totpop);
-                    //console.log(d.RIncDiffP);
                 });
 
                 var margin = 30;
@@ -188,7 +192,7 @@
                 var graph_height = parseInt(d3.select("svg").style("height").replace("px", ""))-margin*2;
 
                 var scaleX = d3.scaleLinear().domain([0.8, 1.6]).range([0, graph_width]);
-                var scaleY = d3.scaleLinear().domain([0.1, 2.2]).range([graph_height, 0]);
+                var scaleY = d3.scaleLinear().domain([0.1, 2.5]).range([graph_height, 0]);
                 var scaleR = d3.scaleLog().domain([10, 100]).range([2, 20]).base(10);
 
                 d3.select("svg")
@@ -201,7 +205,7 @@
                     .enter().append("circle")
                     .attr("id", function(d) { return d.Country; })
                     .attr("cx", function(d) { return scaleX(d.PopDiffP);})
-                    .attr("cy", function(d) { return scaleY(d.RIncDiffP);})
+                    .attr("cy", function(d) { return scaleY(d.RIncDiffP)-margin-10;})
                     .attr("r", function(d, i){return scaleR(d.Totpop);});
 
 
@@ -215,6 +219,26 @@
                 d3.select('svg').append('g')
                     .attr('transform', "translate("+margin+","+(graph_height+10)+")")
                     .call(xAxis);
+
+                d3.select('svg').append('g')
+                    .attr('transform', "translate("+margin+","+(10)+")")
+                    .append("line")
+                        .attr("x1", 0)
+                        .attr("y1", scaleY(1))
+                        .attr("x2", graph_width)
+                        .attr("y2", scaleY(1))
+                        .attr("stroke-width", 0.5)
+                        .attr("stroke", "black");
+                
+                d3.select('svg').append('g')
+                    .attr('transform', "translate("+margin+","+(10)+")")
+                    .append("line")
+                        .attr("x1", scaleX(1))
+                        .attr("y1", 0)
+                        .attr("x2", scaleX(1))
+                        .attr("y2", graph_height)
+                        .attr("stroke-width", 0.5)
+                        .attr("stroke", "black");
 
                 /**** Axes naming ****/
 
@@ -268,40 +292,40 @@
                     // Nigeria
 
                 var annotation_Nigeria = [
-                        {
-                            note: {
-                                label: "Here is the annotation label",
-                                title: "Nigeria",
-                                align: "left",
-                            },
-                            connector: {
-                                end: "none",        // none, or arrow or dot
-                                type: "line",       // Line or curve
-                                points: 3,           // Number of break in the curve
-                                lineType : "horizontal"
-                            },
-                            color: ["#267307"],
-                            x: 675,
-                            y: 270,
-                            dy: -100,
-                            dx: 100
-                        }
-                    ]
+                    {
+                        note: {
+                            label: "hight changes in population but low changes in income difference",
+                            title: "Nigeria",
+                            align: "left",
+                        },
+                        connector: {
+                            end: "none",        // none, or arrow or dot
+                            type: "line",       // Line or curve
+                            points: 3,           // Number of break in the curve
+                            lineType : "horizontal"
+                        },
+                        color: ["black"],
+                        x: 675,
+                        y: 270,
+                        dy: -100,
+                        dx: 100
+                    }
+                ]
 
                 // Add annotation to the chart
                 const makeAnnotations1 = d3.annotation()
                     .annotations(annotation_Nigeria);
+                
                 d3.select("svg")
                     .append("g")
                     .call(makeAnnotations1);
-
 
                 // China
 
                 var annotation_China = [
                     {
                         note: {
-                            label: "Here is the annotation label",
+                            label: "low changes in population but extremely hight changes in income difference",
                             title: "China",
                             align: "right",
                         },
@@ -311,8 +335,8 @@
                             points: 3,           // Number of break in the curve
                             lineType : "horizontal"
                         },
-                        color: ["#267307"],
-                        x: 340,
+                        color: ["black"],
+                        x: 350,
                         y: 80,
                         dy: 100,
                         dx: -150
@@ -322,19 +346,19 @@
                 // Add annotation to the chart
                 const makeAnnotations2 = d3.annotation()
                     .annotations(annotation_China);
+
                 d3.select("svg")
                     .append("g")
                     .call(makeAnnotations2);
-
 
                 // USA
 
                 var annotation_USA = [
                     {
                         note: {
-                            label: "Here is the annotation label",
+                            label: "low changes in population but hight changes in income difference",
                             title: "USA",
-                            align: "right",
+                            align: "left",
                         },
                         connector: {
                             end: "none",        // none, or arrow or dot
@@ -342,10 +366,10 @@
                             points: 3,           // Number of break in the curve
                             lineType : "horizontal"
                         },
-                        color: ["#267307"],
-                        x: 465,
+                        color: ["black"],
+                        x: 455,
                         y: 220,
-                        dy: -150,
+                        dy: -120,
                         dx: 150
                     }
                 ]
@@ -393,9 +417,6 @@
                     }
                 }
 
-                //console.log(currentCountryData_array);
-                //console.log(Rrinc_max_array);
-
                 var total_Rrinc_max = getMaxOfArray(Rrinc_max_array);
                 var total_Rrinc_min = getMaxOfArray(Rrinc_min_array);
                 var total_Pop = getMaxOfArray(Pop_array)*2;
@@ -404,9 +425,7 @@
                 var data_min = Rrinc_min_array.map((value, index) => ({x: years[index], y: +value}));
                 var data_pop = Pop_array.map((value, index) => ({x: years[index], y: +value}));
 
-                console.log(data_max);
                 var x = d3.scaleBand().domain(data_max.map(p => p.x)).range([0, graph_width]);
-                console.log(x);
                 var y = d3.scaleLinear().domain([0, total_Rrinc_max]).range([graph_height, 0]);
                 var h = d3.scaleLinear().domain([0, total_Rrinc_max]).range([0, graph_height]);
                 
@@ -575,12 +594,11 @@
 
                 var makeAnnotationsOrangeBar = d3.annotation()
                     .annotations(data_max.map((d,i) => {
-                        //console.log(d);
                         if (i == 3) {
                             return {
                                 note: {
-                                    label: "Here is the annotation label",
-                                    title: d.x,
+                                    label: "orange box - income of the richest, blue box - income of the poorest people",
+                                    //title: d.x,
                                     align: "right",
                                     orientation: "fixed"
                                 },
@@ -594,12 +612,13 @@
                                 y: graph_height - h(d.y) + margin - 5,
                                 dy: -20,
                                 dx: 0,
-                                color: ["#267307"]
+                                color: ["black"]
                             }
                         }
                         else return {};
 
-                    }));
+                }));
+
                 d3.select("svg")
                     .append("g")
                     .call(makeAnnotationsOrangeBar);
@@ -608,31 +627,31 @@
 
                 var makeAnnotationsLineChart = d3.annotation()
                     .annotations(data_pop.map((d,i) => {
-                        console.log(d);
-                if (i == 1) {
-                    return {
-                        note: {
-                            label: "Here is the annotation label",
-                            title: "Annotation for the line chart",
-                            align: "left",
-                            orientation: "fixed"
-                        },
-                        connector: {
-                            end: "none",
-                            type: "line",
-                            points: 3,
-                            lineType : "horizontal"
-                        },
-                        x: x(d.x)+margin*3,
-                        y: graph_height - hp(d.y) +margin,
-                        dy: -80,
-                        dx: 80,
-                        color: ["#267307"]
-                    }
-                }
-                else return {};
+                        if (i == 1) {
+                            return {
+                                note: {
+                                    label: "line of population growth dynamic",
+                                    //title: "Annotation for the line chart",
+                                    align: "left",
+                                    orientation: "fixed"
+                                },
+                                connector: {
+                                    end: "none",
+                                    type: "line",
+                                    points: 3,
+                                    lineType : "horizontal"
+                                },
+                                x: x(d.x)+margin*3,
+                                y: graph_height - hp(d.y) +margin,
+                                dy: -80,
+                                dx: 80,
+                                color: ["black"]
+                            }
+                        }
+                        else return {};
 
-            }));
+                    }));
+
                 d3.select("svg")
                     .append("g")
                     .call(makeAnnotationsLineChart);
@@ -672,18 +691,11 @@
                     }
                 }
 
-                //console.log(currentCountryData_array);
-                //console.log(Rrinc_max_array);
-
                 var total_Rrinc = 2;
                 var total_Pop = 2;
 
-                //console.log(total_Rrinc_max);
-
                 var data_rinc = Rrinc_array.map((value, index) => ({x: years[index], y: +value}));
                 var data_pop = Pop_array.map((value, index) => ({x: years[index], y: +value}));
-                console.log('data_rinc', data_rinc);
-                console.log('data_pop', data_pop);
 
                 var x = d3.scaleBand().domain(data_rinc.map(p => p.x)).range([0, graph_width]);
                 var y = d3.scaleLinear().domain([0, total_Rrinc]).range([graph_height, 0]);
@@ -815,31 +827,32 @@
 
                 var makeAnnotationsBlueLine = d3.annotation()
                     .annotations(data_rinc.map((d,i) => {
-                        console.log(d);
-                if (i == 1) {
-                    return {
-                        note: {
-                            label: "Here is the annotation label",
-                            title: "Annotation for the blue line",
-                            align: "left",
-                            orientation: "fixed"
-                        },
-                        connector: {
-                            end: "none",
-                            type: "line",
-                            points: 3,
-                            lineType : "horizontal"
-                        },
-                        x: x(d.x)+margin*3,
-                        y: graph_height - h(d.y) +margin,
-                        dy: -80,
-                        dx: 80,
-                        color: ["blue"]
-                    }
-                }
-                else return {};
+                        if (i == 1) {
+                            return {
+                                note: {
+                                    label: "as we can see, it not depends on population changes",
+                                    title: "Income difference changes",
+                                    align: "left",
+                                    wrap: 300,
+                                    orientation: "fixed"
+                                },
+                                connector: {
+                                    end: "none",
+                                    type: "line",
+                                    points: 3,
+                                    lineType : "horizontal"
+                                },
+                                x: x(d.x)+margin*3,
+                                y: graph_height - h(d.y) +margin,
+                                dy: -80,
+                                dx: 80,
+                                color: ["blue"]
+                            }
+                        }
+                        else return {};
 
-            }));
+                    }));
+
                 d3.select("svg")
                     .append("g")
                     .call(makeAnnotationsBlueLine);
@@ -852,9 +865,10 @@
                 if (i == 2) {
                     return {
                         note: {
-                            label: "Here is the annotation label",
-                            title: "Annotation for the red line",
+                            //label: "Here is the annotation label",
+                            title: "Population changes",
                             align: "right",
+                            wrap: 300,
                             orientation: "fixed"
                         },
                         connector: {
